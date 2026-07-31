@@ -330,8 +330,11 @@ def create_intermediate_pipeline(
             ),
         ),
         ExecuteSQL(
-            "DropHiddenVariants",  # All TN-* variants
-            "DELETE FROM trips WHERE extra_fields_json ->> 'variant_code' LIKE 'TN-%'",
+            "DropVirtualVariants",
+            (
+                "WITH virtual_variants AS (SELECT variant_id FROM variants WHERE is_virtual = 1) "
+                "DELETE FROM trips WHERE shape_id IN virtual_variants"
+            ),
         ),
         ExecuteSQL(
             "SetTripDirection",
