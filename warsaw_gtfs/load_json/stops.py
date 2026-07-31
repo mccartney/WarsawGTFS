@@ -38,6 +38,7 @@ def parse_stop(data: Any, group: Group, street_name: str, used_ids: set[str]) ->
         data["gps_n"],
         data["gps_e"],
         code=code,
+        wheelchair_boarding=data["stopien_dostepnosci_slupka_dla_niepelnosprawnych"] < 6,
         extra_fields_json=compact_json(
             {
                 "stop_name_stem": group.name,

@@ -53,7 +53,6 @@ def parse_variant_stop(data: Any, stop_id: str, zone_id: str) -> SQLRow:
         data["slupek_na_zadanie"] or 0,
         data["slupek_nie_dla_pasazera"] or 0,
         data["tras_wirtualny"] or 0,
-        data["stopien_dostepnosci_slupka_dla_niepelnosprawnych"],
         zone_id,
         data["tras_granica_taryf"] or 0,
     )

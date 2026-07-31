@@ -381,14 +381,6 @@ def create_intermediate_pipeline(
         # ========================
         # 6. Infer stop attributes based on variant-stop data
         # ========================
-        ExecuteSQL(
-            "SetStopAccessibility",
-            (
-                "UPDATE stops SET wheelchair_boarding = iif(stop_id IN "
-                "(SELECT DISTINCT variant_stops.stop_id FROM variant_stops "
-                "WHERE accessibility >= 6), 0, 1)"
-            ),
-        ),
         AssignZoneId(),
         # ========================
         # 7. Run garbage collection
