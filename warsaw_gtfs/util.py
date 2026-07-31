@@ -1,5 +1,8 @@
 import json
-from typing import Any
+from typing import Any, TypeVar
+
+T = TypeVar("T")
+U = TypeVar("U")
 
 
 def compact_json(data: Any) -> str:
@@ -8,3 +11,7 @@ def compact_json(data: Any) -> str:
 
 def is_railway_stop(code: str) -> bool:
     return code[1:3] in {"90", "91", "92"} or code == "1930"
+
+
+def coalesce(value: T | None, fallback: U) -> T | U:
+    return fallback if value is None else value
