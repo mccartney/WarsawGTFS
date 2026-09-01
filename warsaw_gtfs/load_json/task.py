@@ -25,7 +25,8 @@ CREATE TABLE variants (
     direction INTEGER,
     is_main INTEGER NOT NULL DEFAULT 0 CHECK (is_main IN (0, 1)),
     is_exceptional INTEGER NOT NULL DEFAULT 0 CHECK (is_exceptional IN (0, 1)),
-    is_not_available INTEGER NOT NULL DEFAULT 0 CHECK (is_not_available IN (0, 1))
+    is_not_available INTEGER NOT NULL DEFAULT 0 CHECK (is_not_available IN (0, 1)),
+    is_virtual INTEGER NOT NULL DEFAULT 0 CHECK (is_virtual IN (0, 1))
 ) STRICT;
 
 CREATE TABLE variant_stops (
@@ -37,7 +38,6 @@ CREATE TABLE variant_stops (
     is_request INTEGER NOT NULL DEFAULT 0 CHECK (is_request IN (0, 1)),
     is_not_available INTEGER NOT NULL DEFAULT 0 CHECK (is_not_available IN (0, 1)),
     is_virtual INTEGER NOT NULL DEFAULT 0 CHECK (is_virtual IN (0, 1)),
-    accessibility INTEGER,
     zone_id TEXT NOT NULL DEFAULT '',
     is_zone_border INTEGER NOT NULL DEFAULT 0 CHECK (is_zone_border IN (0, 1)),
     PRIMARY KEY (variant_id, stop_sequence)
@@ -125,7 +125,7 @@ class LoadJSON(Task):
         self.logger.debug("Loading variants")
         assert self.route_id_lookup
         db.raw_execute_many(
-            "INSERT INTO variants VALUES (?,?,?,?,?,?,0)",
+            "INSERT INTO variants VALUES (?,?,?,?,?,?,?,?)",
             parse_variants(data, self.route_id_lookup),
         )
 
@@ -133,7 +133,7 @@ class LoadJSON(Task):
         self.logger.debug("Loading variant stops")
         assert self.stop_id_lookup
         db.raw_execute_many(
-            "INSERT INTO variant_stops VALUES (?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO variant_stops VALUES (?,?,?,?,?,?,?,?)",
             parse_variant_stops(data, self.stop_id_lookup, self.zone_id_lookup),
         )
 

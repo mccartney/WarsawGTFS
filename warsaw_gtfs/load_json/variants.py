@@ -3,6 +3,8 @@ from typing import Any, Mapping, cast
 
 from impuls.db import SQLRow
 
+from ..util import coalesce
+
 
 def parse_variants(data: Any, route_id_lookup: Mapping[int, str]) -> Iterable[SQLRow]:
     for variant in data["warianty"]:
@@ -23,7 +25,9 @@ def parse_variant(data: Any, route_id: str) -> SQLRow:
         (data["nazwa_wariantu"] or "").upper(),
         direction,
         data["war_glowny"] or 0,
-        data["war_dojazd"] or 0,
+        coalesce(data["koralik_do_internetu"], 0) == 0,
+        0,
+        coalesce(data["do_inf_internetowej"], 1) == 0,
     )
 
 
@@ -49,7 +53,6 @@ def parse_variant_stop(data: Any, stop_id: str, zone_id: str) -> SQLRow:
         data["slupek_na_zadanie"] or 0,
         data["slupek_nie_dla_pasazera"] or 0,
         data["tras_wirtualny"] or 0,
-        data["stopien_dostepnosci_slupka_dla_niepelnosprawnych"],
         zone_id,
         data["tras_granica_taryf"] or 0,
     )

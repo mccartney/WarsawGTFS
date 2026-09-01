@@ -330,8 +330,11 @@ def create_intermediate_pipeline(
             ),
         ),
         ExecuteSQL(
-            "DropHiddenVariants",  # All TN-* variants
-            "DELETE FROM trips WHERE extra_fields_json ->> 'variant_code' LIKE 'TN-%'",
+            "DropVirtualVariants",
+            (
+                "WITH virtual_variants AS (SELECT variant_id FROM variants WHERE is_virtual = 1) "
+                "DELETE FROM trips WHERE shape_id IN virtual_variants"
+            ),
         ),
         ExecuteSQL(
             "SetTripDirection",
@@ -378,14 +381,6 @@ def create_intermediate_pipeline(
         # ========================
         # 6. Infer stop attributes based on variant-stop data
         # ========================
-        ExecuteSQL(
-            "SetStopAccessibility",
-            (
-                "UPDATE stops SET wheelchair_boarding = iif(stop_id IN "
-                "(SELECT DISTINCT variant_stops.stop_id FROM variant_stops "
-                "WHERE accessibility >= 6), 0, 1)"
-            ),
-        ),
         AssignZoneId(),
         # ========================
         # 7. Run garbage collection
