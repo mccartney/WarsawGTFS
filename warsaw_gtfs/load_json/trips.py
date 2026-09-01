@@ -72,6 +72,7 @@ def parse_trip(
         extra_fields_json=compact_json(
             {
                 "block_short_name": brigade,
+                "job_name": job.name,
                 "fleet_type": fleet_type,
             }
         ),
@@ -96,7 +97,7 @@ def parse_schedules(
 def parse_jobs(data: Any) -> dict[int, Job]:
     return {
         i["id_zadania"]: Job(
-            name=i["nazwa_zadania"],
+            name=i["nazwa_zadania"] or "",
             vehicle_kind=i["id_taboru"],
         )
         for i in data["zadania"]
