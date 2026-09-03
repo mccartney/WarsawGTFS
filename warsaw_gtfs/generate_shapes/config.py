@@ -28,7 +28,7 @@ class GraphConfig:
     """Name of a resource containing manual overrides for shape generation"""
 
     max_stop_to_node_distance: float = 100.0
-    """Max distance between a stop and its matched node in the graph."""
+    """Max distance, in meters, between a stop and its matched node in the graph."""
 
 
 @dataclass
