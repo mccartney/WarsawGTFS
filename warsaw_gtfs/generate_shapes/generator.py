@@ -6,6 +6,7 @@ from math import inf
 from pathlib import Path
 
 import routx
+from impuls.tools.geo import earth_distance_m
 
 from .config import LoggingConfig
 from .model import (
@@ -75,7 +76,7 @@ class ShapeGenerator:
 
         lat, lon = self.stop_positions[stop_id]
         node = self.kd_tree.find_nearest_node(lat, lon)
-        dist = routx.earth_distance(lat, lon, node.lat, node.lon)
+        dist = earth_distance_m(lat, lon, node.lat, node.lon)
         if dist > self.max_stop_to_node_distance:
             node_id = 0
             self.logger.error(
