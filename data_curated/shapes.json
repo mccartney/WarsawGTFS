@@ -119,6 +119,12 @@
       "to": "435801",
       "via": [52.10678, 20.96913],
       "comment": "L33 for PKP Jeziorki via Raszyńska street"
+    },
+    {
+      "from": "707904",
+      "to": "706703",
+      "via": [52.23819, 21.025393],
+      "comment": "162 and others via Topiel, not Dobra"
     }
   ],
   "ratio_overrides": [
