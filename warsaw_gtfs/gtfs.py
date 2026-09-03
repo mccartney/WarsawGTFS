@@ -63,6 +63,7 @@ GTFS_HEADERS = {
         "wheelchair_accessible",
         "block_id",
         "block_short_name",
+        "depot_id",
         "variant_code",
         "fleet_type",
     ),

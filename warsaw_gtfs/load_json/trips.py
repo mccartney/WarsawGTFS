@@ -16,6 +16,7 @@ class Schedule(NamedTuple):
 class Job(NamedTuple):
     name: str
     vehicle_kind: int
+    depot: int | None
 
 
 def parse_trips(
@@ -72,6 +73,7 @@ def parse_trip(
         extra_fields_json=compact_json(
             {
                 "block_short_name": brigade,
+                "depot_id": str(job.depot) if job.depot is not None else "",
                 "fleet_type": fleet_type,
             }
         ),
@@ -98,6 +100,7 @@ def parse_jobs(data: Any) -> dict[int, Job]:
         i["id_zadania"]: Job(
             name=i["nazwa_zadania"],
             vehicle_kind=i["id_taboru"],
+            depot=i["id_zajezdni"],
         )
         for i in data["zadania"]
     }
