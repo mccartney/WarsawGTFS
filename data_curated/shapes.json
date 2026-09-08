@@ -131,6 +131,18 @@
       "to": "706703",
       "via": [52.23819, 21.025393],
       "comment": "162 and others via Topiel, not Dobra"
+    },
+    {
+      "from": "420503",
+      "to": "434204",
+      "via": [52.1928229, 20.8718127],
+      "comment": "187 for PKP Ursus-Niedźwiadek 04 via Orląt Lwowskich"
+    },
+    {
+      "from": "434201",
+      "to": "420501",
+      "via": [52.1928229, 20.8718127],
+      "comment": "187 for Bełzy 01 via Orląt Lwowskich"
     }
   ],
   "ratio_overrides": [
