@@ -143,6 +143,12 @@
       "to": "420501",
       "via": [52.1928229, 20.8718127],
       "comment": "187 for Bełzy 01 via Orląt Lwowskich"
+    },
+    {
+      "from": "411202",
+      "to": "403201",
+      "via": [52.2010196, 20.980364],
+      "comment": "172 for Sadyba via Mołdawska and Pruszkowska"
     }
   ],
   "ratio_overrides": [
