@@ -131,6 +131,12 @@
       "to": "706703",
       "via": [52.23819, 21.025393],
       "comment": "162 and others via Topiel, not Dobra"
+    },
+    {
+      "from": "411202",
+      "to": "403201",
+      "via": [52.2010196, 20.980364],
+      "comment": "172 for Sadyba via Mołdawska and Pruszkowska"
     }
   ],
   "ratio_overrides": [
