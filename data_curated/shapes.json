@@ -137,6 +137,12 @@
       "to": "403201",
       "via": [52.2010196, 20.980364],
       "comment": "172 for Sadyba via Mołdawska and Pruszkowska"
+    },
+    {
+      "from": "424302",
+      "to": "430902",
+      "via": [52.182508, 20.8881204],
+      "comment": "207 for Melcera 02 via Stanisława Bodycha"
     }
   ],
   "ratio_overrides": [
