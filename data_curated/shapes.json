@@ -215,6 +215,18 @@
       "to": "302704",
       "via": [52.1984193, 21.0383774],
       "comment": "172 for Dolna 04 up the Sobieskiego busway, not a U-turn at Beethovena"
+    },
+    {
+      "from": "507204",
+      "to": "507305",
+      "via": [52.245452, 20.940731],
+      "comment": "129 and 249 for Koło 05 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
+    },
+    {
+      "from": "507204",
+      "to": "507306",
+      "via": [52.245452, 20.940731],
+      "comment": "184 for Koło 06 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
     }
   ],
   "ratio_overrides": [
