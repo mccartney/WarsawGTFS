@@ -131,6 +131,18 @@
       "to": "706703",
       "via": [52.23819, 21.025393],
       "comment": "162 and others via Topiel, not Dobra"
+    },
+    {
+      "from": "507204",
+      "to": "507305",
+      "via": [52.245452, 20.940731],
+      "comment": "129 and 249 for Koło 05 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
+    },
+    {
+      "from": "507204",
+      "to": "507306",
+      "via": [52.245452, 20.940731],
+      "comment": "184 for Koło 06 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
     }
   ],
   "ratio_overrides": [
