@@ -185,6 +185,36 @@
       "to": "109604",
       "via": [52.3154193, 21.0010219],
       "comment": "126, N64 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
+    },
+    {
+      "from": "302801",
+      "to": "349105",
+      "via": [52.195081, 21.0417507],
+      "comment": "116, 166 and 172 for Idzikowskiego 05 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302801",
+      "to": "309501",
+      "via": [52.195081, 21.0417507],
+      "comment": "503 for Warneńska 01 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302801",
+      "to": "303101",
+      "via": [52.195081, 21.0417507],
+      "comment": "E-2 for Mangalia 01 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302802",
+      "to": "302702",
+      "via": [52.2006716, 21.0364298],
+      "comment": "116, 166, 503 and E-2 for Dolna 02 up the Sobieskiego busway, not a U-turn at Beethovena"
+    },
+    {
+      "from": "302802",
+      "to": "302704",
+      "via": [52.1984193, 21.0383774],
+      "comment": "172 for Dolna 04 up the Sobieskiego busway, not a U-turn at Beethovena"
     }
   ],
   "ratio_overrides": [
