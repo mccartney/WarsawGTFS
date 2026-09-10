@@ -167,6 +167,12 @@
       "to": "209701",
       "via": [52.2312537, 21.0663678],
       "comment": "411, E-1 for Saska 01 via Brazylijska and Międzynarodowa"
+    },
+    {
+      "from": "208201",
+      "to": "208202",
+      "via": [52.260766, 21.151131],
+      "comment": "153 turns around at rondo Polskich Maratończyków (Rembertów tunnel diversion)"
     }
   ],
   "ratio_overrides": [
