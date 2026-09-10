@@ -227,6 +227,12 @@
       "to": "507306",
       "via": [52.245452, 20.940731],
       "comment": "184 for Koło 06 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
+    },
+    {
+      "from": "418303",
+      "to": "413104",
+      "via": [52.1824861, 20.8989669],
+      "comment": "220 for Starodęby 04 onwards along Bodycha and Al. Jerozolimskie, not back up Ryżowa"
     }
   ],
   "ratio_overrides": [
