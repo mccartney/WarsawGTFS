@@ -161,6 +161,18 @@
       "to": "208202",
       "via": [52.260766, 21.151131],
       "comment": "153 turns around at rondo Polskich Maratończyków (Rembertów tunnel diversion)"
+    },
+    {
+      "from": "109506",
+      "to": "109604",
+      "via": [52.3154193, 21.0010219],
+      "comment": "314, 126 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
+    },
+    {
+      "from": "109507",
+      "to": "109604",
+      "via": [52.3154193, 21.0010219],
+      "comment": "126, N64 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
     }
   ],
   "ratio_overrides": [
