@@ -143,6 +143,96 @@
       "to": "420501",
       "via": [52.1928229, 20.8718127],
       "comment": "187 for Bełzy 01 via Orląt Lwowskich"
+    },
+    {
+      "from": "411202",
+      "to": "403201",
+      "via": [52.2010196, 20.980364],
+      "comment": "172 for Sadyba via Mołdawska and Pruszkowska"
+    },
+    {
+      "from": "424302",
+      "to": "430902",
+      "via": [52.182508, 20.8881204],
+      "comment": "207 for Melcera 02 via Stanisława Bodycha"
+    },
+    {
+      "from": "327903",
+      "to": "333802",
+      "via": [52.163423, 21.027161],
+      "comment": "401 for Bacha 02 via the U-turn near P&R Ursynów"
+    },
+    {
+      "from": "214302",
+      "to": "209701",
+      "via": [52.2312537, 21.0663678],
+      "comment": "411, E-1 for Saska 01 via Brazylijska and Międzynarodowa"
+    },
+    {
+      "from": "208201",
+      "to": "208202",
+      "via": [52.260766, 21.151131],
+      "comment": "153 turns around at rondo Polskich Maratończyków (Rembertów tunnel diversion)"
+    },
+    {
+      "from": "109506",
+      "to": "109604",
+      "via": [52.3154193, 21.0010219],
+      "comment": "314, 126 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
+    },
+    {
+      "from": "109507",
+      "to": "109604",
+      "via": [52.3154193, 21.0010219],
+      "comment": "126, N64 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
+    },
+    {
+      "from": "302801",
+      "to": "349105",
+      "via": [52.195081, 21.0417507],
+      "comment": "116, 166 and 172 for Idzikowskiego 05 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302801",
+      "to": "309501",
+      "via": [52.195081, 21.0417507],
+      "comment": "503 for Warneńska 01 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302801",
+      "to": "303101",
+      "via": [52.195081, 21.0417507],
+      "comment": "E-2 for Mangalia 01 down the Sobieskiego busway, not around Beethovena"
+    },
+    {
+      "from": "302802",
+      "to": "302702",
+      "via": [52.2006716, 21.0364298],
+      "comment": "116, 166, 503 and E-2 for Dolna 02 up the Sobieskiego busway, not a U-turn at Beethovena"
+    },
+    {
+      "from": "302802",
+      "to": "302704",
+      "via": [52.1984193, 21.0383774],
+      "comment": "172 for Dolna 04 up the Sobieskiego busway, not a U-turn at Beethovena"
+    },
+    {
+      "from": "507204",
+      "to": "507305",
+      "via": [52.245452, 20.940731],
+      "comment": "129 and 249 for Koło 05 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
+    },
+    {
+      "from": "507204",
+      "to": "507306",
+      "via": [52.245452, 20.940731],
+      "comment": "184 for Koło 06 via Newelska and Księcia Janusza, not back up Erazma Ciołka"
+    },
+    {
+      "from": "418303",
+      "to": "413104",
+      "via": [52.1824861, 20.8989669],
+      "comment": "220 for Starodęby 04 onwards along Bodycha and Al. Jerozolimskie, not back up Ryżowa"
     }
   ],
   "ratio_overrides": [
