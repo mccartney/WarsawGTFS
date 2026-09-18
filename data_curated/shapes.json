@@ -257,6 +257,12 @@
       "to": "228301",
       "via": [52.2535848, 21.2306062],
       "comment": "198 for Chodkiewicza 01 along Głowackiego and down Chodkiewicza, not via Akacjowa and Szarych Szeregów"
+    },
+    {
+      "from": "181002",
+      "to": "181102",
+      "via": [52.453792, 20.9550041],
+      "comment": "L10, L11, L-9 for Wieliszew Willowa 02 up Słoneczna, not back along Modlińska and Krótka"
     }
   ],
   "ratio_overrides": [
