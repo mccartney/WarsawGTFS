@@ -233,6 +233,12 @@
       "to": "413104",
       "via": [52.1824861, 20.8989669],
       "comment": "220 for Starodęby 04 onwards along Bodycha and Al. Jerozolimskie, not back up Ryżowa"
+    },
+    {
+      "from": "244351",
+      "to": "250752",
+      "via": [52.1627549, 21.2126619],
+      "comment": "115, 142, 161 for PKP Falenica (Bystrzycka) 52 along Frenkla, not via Kędzierzyńska and Firletki"
     }
   ],
   "ratio_overrides": [
@@ -241,8 +247,10 @@
     {"from": "120502", "to": "120501", "ratio": 17.8},
     {"from": "201802", "to": "226002", "ratio": 3.8},
     {"from": "203904", "to": "203903", "ratio": 7.8},
+    {"from": "204702", "to": "244351", "ratio": 4.8},
     {"from": "206101", "to": "206102", "ratio": 10.5},
     {"from": "207902", "to": "201801", "ratio": 3.7},
+    {"from": "244352", "to": "204701", "ratio": 8.7},
     {"from": "287201", "to": "236901", "ratio": 4.5},
     {"from": "325402", "to": "325401", "ratio": 25.2},
     {"from": "418202", "to": "418101", "ratio": 3.9},
