@@ -245,6 +245,18 @@
       "to": "301202",
       "via": [52.1554342, 21.0178082],
       "comment": "300 for Metro Wilanowska, turning around at Romera"
+    },
+    {
+      "from": "228353",
+      "to": "234451",
+      "via": [52.2535848, 21.2306062],
+      "comment": "198 for PKP Wesoła 51 up Chodkiewicza and along Głowackiego, not via Sikorskiego and Akacjowa"
+    },
+    {
+      "from": "234451",
+      "to": "228301",
+      "via": [52.2535848, 21.2306062],
+      "comment": "198 for Chodkiewicza 01 along Głowackiego and down Chodkiewicza, not via Akacjowa and Szarych Szeregów"
     }
   ],
   "ratio_overrides": [
