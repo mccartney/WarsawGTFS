@@ -269,6 +269,18 @@
       "to": "135802",
       "via": [52.3162205, 21.0552597],
       "comment": "234 for Os. Derby III 02 along Astrowa, not back up Ostródzka and round Berensona"
+    },
+    {
+      "from": "665603",
+      "to": "666551",
+      "via": [52.3899907, 20.7338636],
+      "comment": "755 turns around at the Czosnów roundabout after Czosnów 03, not on the spot"
+    },
+    {
+      "from": "665603",
+      "to": "666602",
+      "via": [52.3899907, 20.7338636],
+      "comment": "755 turns around at the Czosnów roundabout after Czosnów 03, not on the spot"
     }
   ],
   "ratio_overrides": [
