@@ -263,6 +263,12 @@
       "to": "181102",
       "via": [52.453792, 20.9550041],
       "comment": "L10, L11, L-9 for Wieliszew Willowa 02 up Słoneczna, not back along Modlińska and Krótka"
+    },
+    {
+      "from": "128601",
+      "to": "135802",
+      "via": [52.3162205, 21.0552597],
+      "comment": "234 for Os. Derby III 02 along Astrowa, not back up Ostródzka and round Berensona"
     }
   ],
   "ratio_overrides": [
