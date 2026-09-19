@@ -293,6 +293,12 @@
       "to": "623202",
       "via": [52.2506239, 20.8412413],
       "comment": "712 for CH Babice Nowe 02 via Piłsudskiego and Kresowa, not reversing on Rynek"
+    },
+    {
+      "from": "182003",
+      "to": "184701",
+      "via": [52.4477457, 20.9729858],
+      "comment": "Z40, L10, L11, L-9 for Wieliszew Solidarności 01 along Aleja Solidarności, not back along Modlińska and Kościelna"
     }
   ],
   "ratio_overrides": [
