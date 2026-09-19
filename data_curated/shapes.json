@@ -281,6 +281,18 @@
       "to": "666602",
       "via": [52.3899907, 20.7338636],
       "comment": "755 turns around at the Czosnów roundabout after Czosnów 03, not on the spot"
+    },
+    {
+      "from": "623202",
+      "to": "611501",
+      "via": [52.2506239, 20.8412413],
+      "comment": "712 for Stare Babice Rynek 01 via Kresowa and Piłsudskiego, not reversing on Rynek"
+    },
+    {
+      "from": "611502",
+      "to": "623202",
+      "via": [52.2506239, 20.8412413],
+      "comment": "712 for CH Babice Nowe 02 via Piłsudskiego and Kresowa, not reversing on Rynek"
     }
   ],
   "ratio_overrides": [
