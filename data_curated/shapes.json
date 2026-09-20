@@ -299,6 +299,12 @@
       "to": "184701",
       "via": [52.4477457, 20.9729858],
       "comment": "Z40, L10, L11, L-9 for Wieliszew Solidarności 01 along Aleja Solidarności, not back along Modlińska and Kościelna"
+    },
+    {
+      "from": "503401",
+      "to": "503471",
+      "via": [52.237232, 20.917092],
+      "comment": "149, 714, 719, 729 to Metro Bemowo 71 via Konarskiego, not a U-turn on Górczewska and a service road at Czumy"
     }
   ],
   "ratio_overrides": [
