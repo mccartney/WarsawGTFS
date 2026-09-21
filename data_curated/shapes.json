@@ -305,6 +305,12 @@
       "to": "503471",
       "via": [52.237232, 20.917092],
       "comment": "149, 714, 719, 729 to Metro Bemowo 71 via Konarskiego, not a U-turn on Górczewska and a service road at Czumy"
+    },
+    {
+      "from": "166702",
+      "to": "176301",
+      "via": [52.3160806, 21.2916235],
+      "comment": "L37 turns round at the Polna junction in Cięciwa, not on the spot at Cięciwa Polna 02"
     }
   ],
   "ratio_overrides": [
