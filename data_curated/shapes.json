@@ -187,6 +187,12 @@
       "comment": "126, N64 reach Os. Marywilska 04 straight off Płochocińska, not backwards off Kupiecka"
     },
     {
+      "from": "302601",
+      "to": "302701",
+      "via": [52.2036892, 21.0336465],
+      "comment": "116, 166, 503 and E-2 for Dolna 01 down the Belwederska busway, not the carriageway and back up from Chełmska"
+    },
+    {
       "from": "302801",
       "to": "349105",
       "via": [52.195081, 21.0417507],
