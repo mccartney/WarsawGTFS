@@ -329,6 +329,18 @@
       "to": "324502",
       "via": [52.1712457, 21.0045415],
       "comment": "N34 out of Pętla Bokserska reaches Gotarda 02 via ul. Gotarda, not past the stop and back up Rzymowskiego"
+    },
+    {
+      "from": "175652",
+      "to": "175502",
+      "via": [52.3368843, 21.2384961],
+      "comment": "L38 for Wołomin Lipińska 02 via Brzozowa and Wiejska, not via Sikorskiego and back along Lipińska"
+    },
+    {
+      "from": "139601",
+      "to": "175601",
+      "via": [52.3368843, 21.2384961],
+      "comment": "L38 for Wołomin Partyzantów - Szkoła 01 via Wiejska and Brzozowa, not via Lipińska and Sikorskiego"
     }
   ],
   "ratio_overrides": [
