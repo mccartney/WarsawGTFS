@@ -28,18 +28,62 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      # Dependencies are installed before, and without, the ZTM credentials.
+      # Dependencies are installed before, and without, the ZTM or AWS credentials.
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          curl -fsSLo /tmp/ssm-plugin.deb \
+            https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb
+          sudo dpkg -i /tmp/ssm-plugin.deb
 
-      # The only step that sees the ZTM credentials. Don't add -v: DEBUG logging would include
-      # HTTP request details. No artifacts: the workspace holds raw ZTM data.
+      - id: aws
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-duration-seconds: 3600
+
+      # eta.ztm.waw.pl drops connections from GitHub's (US) runners. Relay them through a stopped-by-
+      # default EC2 instance in eu-west-1 via SSM port forwarding: localhost:443 -> instance ->
+      # eta.ztm.waw.pl:443, with the hostname pointed at localhost. TLS stays end-to-end, so the
+      # certificate is still verified and the instance never sees the credentials.
+      - name: Open tunnel to eta.ztm.waw.pl
+        env:
+          INSTANCE: ${{ vars.ZTM_TUNNEL_INSTANCE_ID }}
+        run: |
+          aws ec2 start-instances --instance-ids "$INSTANCE" > /dev/null
+          aws ec2 wait instance-running --instance-ids "$INSTANCE"
+          for i in $(seq 60); do
+            sudo -E env "PATH=$PATH" aws ssm start-session --target "$INSTANCE" \
+              --document-name AWS-StartPortForwardingSessionToRemoteHost \
+              --parameters host=eta.ztm.waw.pl,portNumber=443,localPortNumber=443 \
+              > tunnel.log 2>&1 &
+            for j in $(seq 10); do
+              if nc -z 127.0.0.1 443; then break 2; fi
+              sleep 1
+            done
+            sudo kill $! 2> /dev/null || true  # agent not online yet, retry
+            sleep 5
+          done
+          nc -z 127.0.0.1 443 || { cat tunnel.log; exit 1; }
+          echo "127.0.0.1 eta.ztm.waw.pl" | sudo tee -a /etc/hosts
+          echo "Tunnel check (401 expected): $(curl -m 20 -s -o /dev/null -w '%{http_code}' https://eta.ztm.waw.pl/apiversion)"
+
+      # The only step that sees the ZTM credentials; the AWS ones are hidden from it. Don't add -v:
+      # DEBUG logging would include HTTP request details. No artifacts: the workspace holds raw ZTM data.
       - name: Build GTFS
         env:
           WARSAW_ZTM_USER: ${{ secrets.WARSAW_ZTM_USER }}
           WARSAW_ZTM_PASS: ${{ secrets.WARSAW_ZTM_PASS }}
           WARSAW_ZTM_KEY: ${{ secrets.WARSAW_ZTM_KEY }}
+          AWS_ACCESS_KEY_ID: ""
+          AWS_SECRET_ACCESS_KEY: ""
+          AWS_SESSION_TOKEN: ""
         run: python -m warsaw_gtfs --shapes -o warsaw.zip
+
+      - name: Stop tunnel instance
+        if: always() && steps.aws.outcome == 'success'
+        run: aws ec2 stop-instances --instance-ids "${{ vars.ZTM_TUNNEL_INSTANCE_ID }}" > /dev/null
 
       - name: Set feed publisher
         run: >
@@ -55,11 +99,6 @@ jobs:
             echo "No previously published feed, checking without it"
             python tools/check_gtfs.py warsaw.zip
           fi
-
-      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
-        with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Publish to https://436.pl/gtfs/warsaw.zip
         run: |
