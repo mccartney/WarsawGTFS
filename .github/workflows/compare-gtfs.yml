@@ -1,0 +1,28 @@
+name: Compare warsaw.zip with mkuran's
+on:
+  schedule:
+    - cron: "0 5 * * *" # daily, after both feeds have been published
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    # No secrets here: both feeds are public.
+    if: github.repository == 'mccartney/WarsawGTFS'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Download both feeds
+        run: |
+          curl -fsSL -o ours.zip https://436.pl/gtfs/warsaw.zip
+          curl -fsSL -o theirs.zip https://mkuran.pl/gtfs/warsaw.zip
+
+      - name: Compare
+        run: |
+          set -o pipefail
+          python3 tools/compare_gtfs.py ours.zip theirs.zip --fail-unexpected \
+            | tee -a "$GITHUB_STEP_SUMMARY"

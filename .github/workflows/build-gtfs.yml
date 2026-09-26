@@ -1,0 +1,69 @@
+name: Build and publish warsaw.zip
+on:
+  schedule:
+    # Daily, always after midnight Warsaw time (01:30 CEST / 00:30 CET), so that "today" in
+    # ZTMFileProvider is the new day, the same as for mkuran's ~00:15 build.
+    - cron: "30 23 * * *"
+  workflow_dispatch:
+permissions: {}
+concurrency: build-gtfs
+jobs:
+  build:
+    # Only on personal of this repository. The ztm environment is also restricted to personal,
+    # and the AWS role only trusts this repository's ztm environment.
+    if: github.repository == 'mccartney/WarsawGTFS' && github.ref == 'refs/heads/personal'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: ztm
+    permissions:
+      contents: read
+      id-token: write # to assume the AWS role via OIDC
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Dependencies are installed before, and without, the ZTM credentials.
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # The only step that sees the ZTM credentials. Don't add -v: DEBUG logging would include
+      # HTTP request details. No artifacts: the workspace holds raw ZTM data.
+      - name: Build GTFS
+        env:
+          WARSAW_ZTM_USER: ${{ secrets.WARSAW_ZTM_USER }}
+          WARSAW_ZTM_PASS: ${{ secrets.WARSAW_ZTM_PASS }}
+          WARSAW_ZTM_KEY: ${{ secrets.WARSAW_ZTM_KEY }}
+        run: python -m warsaw_gtfs --shapes -o warsaw.zip
+
+      - name: Set feed publisher
+        run: >
+          python tools/set_feed_publisher.py warsaw.zip
+          --name "Grzegorz Olędzki's fork of mkuran"
+          --url https://436.pl/gtfs/
+
+      - name: Sanity-check against the published feed
+        run: |
+          if curl -fsSL -o previous.zip https://436.pl/gtfs/warsaw.zip; then
+            python tools/check_gtfs.py warsaw.zip --previous previous.zip
+          else
+            echo "No previously published feed, checking without it"
+            python tools/check_gtfs.py warsaw.zip
+          fi
+
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Publish to https://436.pl/gtfs/warsaw.zip
+        run: |
+          aws s3 cp warsaw.zip "s3://${{ vars.SITE_BUCKET }}/gtfs/warsaw.zip" \
+            --content-type application/zip --cache-control max-age=3600
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.SITE_DISTRIBUTION_ID }}" --paths '/gtfs/*'
