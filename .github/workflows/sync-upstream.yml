@@ -1,0 +1,26 @@
+name: Sync from upstream
+on:
+  schedule:
+    - cron: "17 4 * * *"   # daily, 04:17 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: sync-upstream
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: personal, fetch-depth: 0 }
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/MKuranowski/WarsawGTFS.git
+          git fetch upstream master
+      - name: Fast-forward master
+        run: git push origin refs/remotes/upstream/master:refs/heads/master
+      - name: Merge upstream into personal
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-edit upstream/master
+          git push origin personal
