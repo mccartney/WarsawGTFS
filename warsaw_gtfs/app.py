@@ -270,6 +270,27 @@ def create_intermediate_pipeline(
         # 3. Infer extra variant & variant-stop attributes
         # ========================
         ExecuteSQL(
+            "UnflagMainRouteCopies",  # e.g. 118 TX-MATv: TO-MAT + a "#" timetable footnote
+            (
+                "WITH signatures AS ("
+                "  SELECT variant_id, group_concat(stop_id, ',') AS stops FROM ("
+                "    SELECT variant_id, stop_id FROM variant_stops"
+                "    ORDER BY variant_id, stop_sequence"
+                "  ) GROUP BY variant_id"
+                ") "
+                "UPDATE variants SET is_exceptional = 0 "
+                "WHERE is_exceptional = 1 AND is_not_available = 0 AND EXISTS ("
+                "  SELECT 1 FROM variants main"
+                "  JOIN signatures ms ON (ms.variant_id = main.variant_id)"
+                "  JOIN signatures vs ON (vs.variant_id = variants.variant_id)"
+                "  WHERE main.is_main = 1 AND main.is_exceptional = 0"
+                "  AND main.route_id = variants.route_id"
+                "  AND main.direction IS variants.direction"
+                "  AND ms.stops = vs.stops"
+                ")"
+            ),
+        ),
+        ExecuteSQL(
             "FlagRepositionVariants",  # 2-stop TU-* variants
             (
                 "UPDATE variants SET is_exceptional = 1, is_not_available = 1 "
