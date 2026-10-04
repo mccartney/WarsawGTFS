@@ -350,13 +350,8 @@ def create_intermediate_pipeline(
                 ")"
             ),
         ),
-        ExecuteSQL(
-            "DropVirtualVariants",
-            (
-                "WITH virtual_variants AS (SELECT variant_id FROM variants WHERE is_virtual = 1) "
-                "DELETE FROM trips WHERE shape_id IN virtual_variants"
-            ),
-        ),
+        # NOTE: Trips of virtual variants (do_inf_internetowej = 0) are kept, as ZTM sets
+        #       that flag on regular depot runs too (MKuranowski/WarsawGTFS#89).
         ExecuteSQL(
             "SetTripDirection",
             (
