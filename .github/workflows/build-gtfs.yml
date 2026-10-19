@@ -36,6 +36,56 @@ jobs:
             https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb
           sudo dpkg -i /tmp/ssm-plugin.deb
 
+      # Geofabrik downloads sometimes hang and get dropped. Fetch the extract here, and on failure
+      # fall back to the newest copy in the Actions cache, as long as it's at most 5 days old.
+      # Either way the impuls metadata gets fetch_time=now, so its TimeLimitedResource (3 days)
+      # uses this file instead of downloading again. The cache holds only this public file.
+      - name: Download OSM extract
+        id: osm
+        continue-on-error: true
+        run: |
+          mkdir -p _impuls_workspace osm-cache
+          curl -fsSLR --retry 3 --retry-all-errors --connect-timeout 30 --max-time 900 \
+            -o osm-extract.tmp https://download.geofabrik.de/europe/poland/mazowieckie-latest.osm.pbf
+          mv osm-extract.tmp osm-cache/mazowieckie-latest.osm.pbf
+          date +%s > osm-cache/fetch_time
+
+      - name: Save OSM extract to cache
+        if: steps.osm.outcome == 'success'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: osm-cache
+          key: osm-extract-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Restore OSM extract from cache
+        if: steps.osm.outcome == 'failure'
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: osm-cache
+          key: osm-extract-
+          restore-keys: osm-extract-
+
+      - name: Put OSM extract into the impuls workspace
+        env:
+          DOWNLOADED: ${{ steps.osm.outcome == 'success' }}
+        run: |
+          if [ ! -f osm-cache/fetch_time ]; then
+            echo "::error::OSM extract download failed and there is no cached copy"
+            exit 1
+          fi
+          age=$(( $(date +%s) - $(cat osm-cache/fetch_time) ))
+          if [ "$DOWNLOADED" != true ]; then
+            if [ "$age" -gt $(( 5 * 86400 )) ]; then
+              echo "::error::OSM extract download failed and the cached copy is $(( age / 3600 ))h old (limit 5 days)"
+              exit 1
+            fi
+            echo "::warning::OSM extract download failed, using the cached copy from $(( age / 3600 ))h ago"
+          fi
+          mv osm-cache/mazowieckie-latest.osm.pbf _impuls_workspace/
+          printf '{"last_modified": %s, "fetch_time": %s}\n' \
+            "$(stat -c %Y _impuls_workspace/mazowieckie-latest.osm.pbf)" "$(date +%s)" \
+            > _impuls_workspace/mazowieckie-latest.osm.pbf.metadata
+
       - id: aws
         uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
