@@ -36,19 +36,46 @@ jobs:
             https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb
           sudo dpkg -i /tmp/ssm-plugin.deb
 
-      # Geofabrik downloads sometimes hang and get dropped. Fetch the extract here, and on failure
-      # fall back to the newest copy in the Actions cache, as long as it's at most 5 days old.
-      # Either way the impuls metadata gets fetch_time=now, so its TimeLimitedResource (3 days)
-      # uses this file instead of downloading again. The cache holds only this public file.
-      - name: Download OSM extract
-        id: osm
-        continue-on-error: true
+      # Geofabrik downloads sometimes hang and get dropped, so keep the extract in the Actions cache.
+      # A HEAD request checks whether Geofabrik has anything newer than the cached copy; if not,
+      # the cache is used as is. Otherwise download, and on failure fall back to the cached copy as
+      # long as its data is at most 5 days old. The file's mtime is Geofabrik's Last-Modified
+      # (curl -R, preserved by the cache's tar). Either way the impuls metadata gets fetch_time=now,
+      # so its TimeLimitedResource (3 days) uses this file instead of downloading again.
+      # The cache holds only this public file.
+      - name: Restore OSM extract from cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: osm-cache
+          key: osm-extract-
+          restore-keys: osm-extract-
+
+      # mazowieckie-latest redirects to the dated file, so follow it and take the last Last-Modified.
+      # Any failure here just means "download".
+      - name: Check for a newer OSM extract
+        id: check
         run: |
           mkdir -p _impuls_workspace osm-cache
+          [ -f osm-cache/mazowieckie-latest.osm.pbf ] || { echo "No cached copy"; exit 0; }
+          remote=$(curl -fsSIL --retry 3 --retry-all-errors --connect-timeout 30 --max-time 120 \
+            https://download.geofabrik.de/europe/poland/mazowieckie-latest.osm.pbf \
+            | grep -i '^last-modified:' | tail -n 1 | cut -d ' ' -f 2- | tr -d '\r') || true
+          remote_ts=$(date -d "$remote" +%s 2> /dev/null) && [ -n "$remote" ] \
+            || { echo "::warning::HEAD request to Geofabrik failed"; exit 0; }
+          cached_ts=$(stat -c %Y osm-cache/mazowieckie-latest.osm.pbf)
+          echo "Geofabrik: $remote, cached: $(date -u -d "@$cached_ts")"
+          if [ "$remote_ts" -le "$cached_ts" ]; then
+            echo "up_to_date=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download OSM extract
+        id: osm
+        if: steps.check.outputs.up_to_date != 'true'
+        continue-on-error: true
+        run: |
           curl -fsSLR --retry 3 --retry-all-errors --connect-timeout 30 --max-time 900 \
             -o osm-extract.tmp https://download.geofabrik.de/europe/poland/mazowieckie-latest.osm.pbf
           mv osm-extract.tmp osm-cache/mazowieckie-latest.osm.pbf
-          date +%s > osm-cache/fetch_time
 
       - name: Save OSM extract to cache
         if: steps.osm.outcome == 'success'
@@ -57,30 +84,25 @@ jobs:
           path: osm-cache
           key: osm-extract-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - name: Restore OSM extract from cache
-        if: steps.osm.outcome == 'failure'
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: osm-cache
-          key: osm-extract-
-          restore-keys: osm-extract-
-
       - name: Put OSM extract into the impuls workspace
         env:
-          DOWNLOADED: ${{ steps.osm.outcome == 'success' }}
+          OUTCOME: ${{ steps.check.outputs.up_to_date == 'true' && 'cached' || steps.osm.outcome }}
         run: |
-          if [ ! -f osm-cache/fetch_time ]; then
+          if [ ! -f osm-cache/mazowieckie-latest.osm.pbf ]; then
             echo "::error::OSM extract download failed and there is no cached copy"
             exit 1
           fi
-          age=$(( $(date +%s) - $(cat osm-cache/fetch_time) ))
-          if [ "$DOWNLOADED" != true ]; then
-            if [ "$age" -gt $(( 5 * 86400 )) ]; then
-              echo "::error::OSM extract download failed and the cached copy is $(( age / 3600 ))h old (limit 5 days)"
-              exit 1
-            fi
-            echo "::warning::OSM extract download failed, using the cached copy from $(( age / 3600 ))h ago"
-          fi
+          age=$(( $(date +%s) - $(stat -c %Y osm-cache/mazowieckie-latest.osm.pbf) ))
+          case "$OUTCOME" in
+            cached) echo "Geofabrik has nothing newer, using the cached copy from $(( age / 3600 ))h ago" ;;
+            success) ;;
+            *)
+              if [ "$age" -gt $(( 5 * 86400 )) ]; then
+                echo "::error::OSM extract download failed and the cached copy is $(( age / 3600 ))h old (limit 5 days)"
+                exit 1
+              fi
+              echo "::warning::OSM extract download failed, using the cached copy from $(( age / 3600 ))h ago" ;;
+          esac
           mv osm-cache/mazowieckie-latest.osm.pbf _impuls_workspace/
           printf '{"last_modified": %s, "fetch_time": %s}\n' \
             "$(stat -c %Y _impuls_workspace/mazowieckie-latest.osm.pbf)" "$(date +%s)" \
