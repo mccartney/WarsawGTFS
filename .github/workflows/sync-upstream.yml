@@ -1,7 +1,7 @@
 name: Sync from upstream
 on:
-  schedule:
-    - cron: "17 4 * * *"   # daily, 04:17 UTC
+  # No schedule of its own: build-gtfs.yml calls this first, so each build includes upstream fixes.
+  workflow_call:
   workflow_dispatch:
 permissions:
   contents: write

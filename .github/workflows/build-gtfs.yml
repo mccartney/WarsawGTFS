@@ -8,10 +8,21 @@ on:
 permissions: {}
 concurrency: build-gtfs
 jobs:
+  # Merge upstream into personal first, so that fixes merged upstream are in the same night's build.
+  sync:
+    if: github.repository == 'mccartney/WarsawGTFS' && github.ref == 'refs/heads/personal'
+    uses: ./.github/workflows/sync-upstream.yml
+    permissions:
+      contents: write
+
   build:
+    needs: sync
     # Only on personal of this repository. The ztm environment is also restricted to personal,
     # and the AWS role only trusts this repository's ztm environment.
-    if: github.repository == 'mccartney/WarsawGTFS' && github.ref == 'refs/heads/personal'
+    # A failed sync (e.g. a merge conflict) still builds personal as it is.
+    if: >-
+      !cancelled() &&
+      github.repository == 'mccartney/WarsawGTFS' && github.ref == 'refs/heads/personal'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     environment: ztm
@@ -21,6 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # Not github.sha: that is fixed at the start of the run, before the sync job's merge.
+          ref: personal
           persist-credentials: false
 
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
