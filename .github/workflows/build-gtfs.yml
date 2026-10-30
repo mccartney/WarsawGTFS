@@ -194,3 +194,54 @@ jobs:
             --content-type application/zip --cache-control max-age=3600
           aws cloudfront create-invalidation \
             --distribution-id "${{ vars.SITE_DISTRIBUTION_ID }}" --paths '/gtfs/*'
+
+      # For the issues job below, to look up stop names, lines and trips. The feed is public anyway.
+      - name: Keep warsaw.zip for the issues job
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: warsaw-zip
+          path: warsaw.zip
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+
+  # Open, reopen or comment on an issue in this repository for each ERROR line of the build
+  # (see tools/build_error_issues.py). A separate job, so that the issues token is never next to
+  # the ZTM credentials. The log is read back through the API instead of being tee'd to a file,
+  # since only the API copy has the secrets masked.
+  issues:
+    needs: build
+    if: always() && (needs.build.result == 'success' || needs.build.result == 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: personal
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        continue-on-error: true
+        with:
+          name: warsaw-zip
+
+      - name: Fetch the build log
+        id: log
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          job=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs" \
+            --jq '.jobs[] | select(.name == "build") | .id')
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/$job/logs" > build.log
+          echo "url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/job/$job" >> "$GITHUB_OUTPUT"
+
+      - name: Raise issues
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ steps.log.outputs.url }}
+        run: python3 tools/build_error_issues.py build.log --gtfs warsaw.zip --run-url "$RUN_URL"
