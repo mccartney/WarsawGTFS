@@ -237,7 +237,7 @@ jobs:
         run: |
           job=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs" \
             --jq '.jobs[] | select(.name == "build") | .id')
-          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/$job/logs" > build.log
+          gh api --allow-escape-sequences "repos/$GITHUB_REPOSITORY/actions/jobs/$job/logs" > build.log
           echo "url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/job/$job" >> "$GITHUB_OUTPUT"
 
       - name: Raise issues
