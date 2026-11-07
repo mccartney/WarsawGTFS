@@ -425,6 +425,12 @@
       "to": "227503",
       "via": [52.222319, 21.2433293],
       "comment": "147 for Stara Miłosna (Ułańska) 03 round Rondo Józefa Maroszka, not reversing at 02"
+    },
+    {
+      "from": "666002",
+      "to": "666001",
+      "via": [52.3524105, 20.8160237],
+      "comment": "150/750 for Izabelin-Dziekanówek 01 round the Kolejowa roundabout, not hairpinning into the bay"
     }
   ],
   "ratio_overrides": [
