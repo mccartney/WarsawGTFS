@@ -467,6 +467,18 @@
       "to": "512701",
       "via": [52.2145685, 20.9309098],
       "comment": "228 for Wagonownia 01 round the Potrzebna roundabout, not reversing at 01"
+    },
+    {
+      "from": "513202",
+      "to": "513402",
+      "via": [52.2130125, 20.7748657],
+      "comment": "713 for Ożarów Mazowiecki Parkowa 02 via Lipowa, not reversing at 02 from Umiastowska"
+    },
+    {
+      "from": "513301",
+      "to": "513402",
+      "via": [52.2130125, 20.7748657],
+      "comment": "743 for Ożarów Mazowiecki Parkowa 02 via Lipowa, not reversing at Umiastowska 01 and 02"
     }
   ],
   "ratio_overrides": [
