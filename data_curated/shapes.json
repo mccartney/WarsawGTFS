@@ -455,6 +455,12 @@
       "to": "612701",
       "via": [52.2869647, 20.7981707],
       "comment": "210/N58 for Hornówek 01 via Lipkowska and the bus bay, not reversing in the bay from Kurowskiego"
+    },
+    {
+      "from": "238901",
+      "to": "238801",
+      "via": [52.1691556, 21.3594996],
+      "comment": "720 for Pęclin Podleśna 01 round the Pęclin turning loop, not reversing at 01"
     }
   ],
   "ratio_overrides": [
