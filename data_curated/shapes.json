@@ -437,6 +437,12 @@
       "to": "417601",
       "via": [52.1190844, 20.9437655],
       "comment": "715/815 for Podolszyn 01 via Olszynowa and the turning loop, not reversing on the Długa stub"
+    },
+    {
+      "from": "611903",
+      "to": "612701",
+      "via": [52.2869647, 20.7981707],
+      "comment": "210/N58 for Hornówek 01 via Lipkowska and the bus bay, not reversing in the bay from Kurowskiego"
     }
   ],
   "ratio_overrides": [
