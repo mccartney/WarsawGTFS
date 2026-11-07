@@ -67,6 +67,18 @@
       "comment": "314 for Tarchomin"
     },
     {
+      "from": "127709",
+      "to": "127701",
+      "via": [52.31776, 20.951267],
+      "comment": "126 for Tarchomin 01 round the block via Świderska and Ćmielowska"
+    },
+    {
+      "from": "127707",
+      "to": "127701",
+      "via": [52.31776, 20.951267],
+      "comment": "152 for Tarchomin 01 round the block via Świderska and Ćmielowska"
+    },
+    {
       "from": "114603",
       "to": "114902",
       "via": [52.29401, 21.04852],
