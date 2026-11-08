@@ -491,6 +491,30 @@
       "to": "101801",
       "via": [52.3151386, 20.9818937],
       "comment": "126 for Ekspresowa 01 clockwise round the Polfa turning loop, not reversing at Polfa 01"
+    },
+    {
+      "from": "131701",
+      "to": "131702",
+      "via": [52.34811, 20.941745],
+      "comment": "211/511 for Dąbrówka Wiślana 02 round the turning loop via Mikołaja Trąby, not reversing at 01"
+    },
+    {
+      "from": "131701",
+      "to": "136602",
+      "via": [52.34811, 20.941745],
+      "comment": "211 for Kępa Tarchomińska round the Dąbrówka Wiślana turning loop, not reversing at 01"
+    },
+    {
+      "from": "136603",
+      "to": "131702",
+      "via": [52.34811, 20.941745],
+      "comment": "211/900 for Dąbrówka Wiślana 02 round the turning loop via Mikołaja Trąby, not reversing at 02"
+    },
+    {
+      "from": "142202",
+      "to": "131702",
+      "via": [52.34811, 20.941745],
+      "comment": "900 for Dąbrówka Wiślana 02 round the turning loop via Mikołaja Trąby, not entering it backwards"
     }
   ],
   "ratio_overrides": [
