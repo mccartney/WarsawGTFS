@@ -479,6 +479,18 @@
       "to": "513402",
       "via": [52.2130125, 20.7748657],
       "comment": "743 for Ożarów Mazowiecki Parkowa 02 via Lipowa, not reversing at Umiastowska 01 and 02"
+    },
+    {
+      "from": "101804",
+      "to": "110202",
+      "via": [52.3154027, 20.9815282],
+      "comment": "126 for Polfa 02 clockwise round the Polfa turning loop, not entering it backwards"
+    },
+    {
+      "from": "110201",
+      "to": "101801",
+      "via": [52.3151386, 20.9818937],
+      "comment": "126 for Ekspresowa 01 clockwise round the Polfa turning loop, not reversing at Polfa 01"
     }
   ],
   "ratio_overrides": [
