@@ -303,8 +303,8 @@
     {
       "from": "623202",
       "to": "611501",
-      "via": [52.2506239, 20.8412413],
-      "comment": "712 for Stare Babice Rynek 01 via Kresowa and Piłsudskiego, not reversing on Rynek"
+      "via": [52.248001, 20.840462],
+      "comment": "712 for Stare Babice Rynek 01 via Kresowa and Piłsudskiego, not reversing on Rynek or at the Piłsudskiego junction"
     },
     {
       "from": "611502",
