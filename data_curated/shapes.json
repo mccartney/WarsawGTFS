@@ -539,6 +539,12 @@
       "to": "428701",
       "via": [52.0822827, 20.7673806],
       "comment": "733 for Stara Wieś 01 round the turning loop, not reversing at the stop"
+    },
+    {
+      "from": "147404",
+      "to": "147601",
+      "via": [52.2877272, 21.1265092],
+      "comment": "245 for Ząbki Gajowa 01 round the Gajowa/Sosnowa/Sikorskiego roundabout, not reversing at 01"
     }
   ],
   "ratio_overrides": [
