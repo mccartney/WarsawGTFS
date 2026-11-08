@@ -521,6 +521,12 @@
       "to": "222005",
       "via": [52.2769327, 21.1703392],
       "comment": "225 for PKP Mokry Ług 05 round the Al. Sztandarów loop, not reversing on Czwartaków"
+    },
+    {
+      "from": "128702",
+      "to": "132601",
+      "via": [52.3253083, 21.0495354],
+      "comment": "204 for Grodzisk via Ostródzka and Olsztyńska, not reversing at Berensona 02"
     }
   ],
   "ratio_overrides": [
