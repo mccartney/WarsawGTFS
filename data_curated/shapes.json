@@ -515,6 +515,12 @@
       "to": "131702",
       "via": [52.34811, 20.941745],
       "comment": "900 for Dąbrówka Wiślana 02 round the turning loop via Mikołaja Trąby, not entering it backwards"
+    },
+    {
+      "from": "222002",
+      "to": "222005",
+      "via": [52.2769327, 21.1703392],
+      "comment": "225 for PKP Mokry Ług 05 round the Al. Sztandarów loop, not reversing on Czwartaków"
     }
   ],
   "ratio_overrides": [
