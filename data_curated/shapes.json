@@ -527,6 +527,18 @@
       "to": "132601",
       "via": [52.3253083, 21.0495354],
       "comment": "204 for Grodzisk via Ostródzka and Olsztyńska, not reversing at Berensona 02"
+    },
+    {
+      "from": "429502",
+      "to": "428701",
+      "via": [52.0822827, 20.7673806],
+      "comment": "733 for Stara Wieś 01 round the turning loop, not reversing at the stop"
+    },
+    {
+      "from": "428801",
+      "to": "428701",
+      "via": [52.0822827, 20.7673806],
+      "comment": "733 for Stara Wieś 01 round the turning loop, not reversing at the stop"
     }
   ],
   "ratio_overrides": [
