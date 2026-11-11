@@ -551,6 +551,12 @@
       "to": "619601",
       "via": [52.2748764, 20.8754658],
       "comment": "N91 for Klaudyn Zorzy 01 round Rondo Radiostacji Babice, not reversing at 02"
+    },
+    {
+      "from": "207057",
+      "to": "208202",
+      "via": [52.2607798, 21.1519414],
+      "comment": "115 for Kordiana 02 via Zesłańców Polskich and Rondo Polskich Maratończyków, not residential Zawiszaków"
     }
   ],
   "ratio_overrides": [
