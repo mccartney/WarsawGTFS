@@ -545,6 +545,12 @@
       "to": "147601",
       "via": [52.2877272, 21.1265092],
       "comment": "245 for Ząbki Gajowa 01 round the Gajowa/Sosnowa/Sikorskiego roundabout, not reversing at 01"
+    },
+    {
+      "from": "619602",
+      "to": "619601",
+      "via": [52.2748764, 20.8754658],
+      "comment": "N91 for Klaudyn Zorzy 01 round Rondo Radiostacji Babice, not reversing at 02"
     }
   ],
   "ratio_overrides": [
