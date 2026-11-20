@@ -575,6 +575,12 @@
       "to": "606904",
       "via": [52.2958201, 20.8954185],
       "comment": "250/409 for Cm. Północny - Brama Gł. 04 along the car park road to Wóycickiego, not reversing at Brama Płd. 02"
+    },
+    {
+      "from": "181402",
+      "to": "181501",
+      "via": [52.4782891, 20.9467221],
+      "comment": "L-9, L10 for Wieliszew - Plaża 01 round the turning loop past the stop, not reversing at the stop on 600-lecia"
     }
   ],
   "ratio_overrides": [
