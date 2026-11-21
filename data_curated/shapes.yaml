@@ -309,6 +309,10 @@ force_via:
     to: 386502
     via: [52.0772199, 21.0983753]
     comment: "L24 for Konstancin-Jeziorna Kazimierzowska 02 up Chylicka and round Rondo Miasta Partnerskiego Nowa Wilejka, not reversing at the stop"
+  - from: 387302
+    to: 387401
+    via: [52.0621615, 21.1554262]
+    comment: "L28 for Łyczyn 01 straight on along Wiślana, not reversing at Słomczyn - Kościół 02 and round Jabłoniowa and Wilanowska"
   - from: 388301
     to: 384201
     via: [52.0224721, 21.0424542]
