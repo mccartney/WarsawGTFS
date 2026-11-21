@@ -257,6 +257,10 @@ force_via:
     to: 337302
     via: [52.02445, 21.1194478]
     comment: "L28 for Solec 02 on along Szkolna and up Graniczna, not reversing at Baniocha - Szkoła 02"
+  - from: 375005
+    to: 375006
+    via: [52.0394262, 20.9958087]
+    comment: "L28 for Jazgarzew Główna 06 round Rondo 700-lecia Jazgarzewa, not reversing at the stop"
   - from: 388301
     to: 384201
     via: [52.0224721, 21.0424542]
