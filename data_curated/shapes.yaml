@@ -277,6 +277,18 @@ force_via:
     to: 337302
     via: [52.02445, 21.1194478]
     comment: "L28 for Solec 02 on along Szkolna and up Graniczna, not reversing at Baniocha - Szkoła 02"
+  - from: 361701
+    to: 332701
+    via: [52.0472116, 20.9018831]
+    comment: "L-5 for Cm. Południowy - Brama Płd. 01 round the Mieszkowo turning loop, not reversing at Mieszkowo 01"
+  - from: 361701
+    to: 332703
+    via: [52.0472116, 20.9018831]
+    comment: "L-1 for Cm. Południowy - Brama Płd. 03 round the Mieszkowo turning loop, not reversing at Mieszkowo 01"
+  - from: 361701
+    to: 361202
+    via: [52.0472116, 20.9018831]
+    comment: "L-1/L-5 for Antoninów Św. Antoniego 02 round the Mieszkowo turning loop, not reversing at Mieszkowo 01"
   - from: 372402
     to: 322301
     via: [52.0813598, 21.0979863]
