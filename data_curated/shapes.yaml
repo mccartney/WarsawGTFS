@@ -111,6 +111,14 @@ force_via:
     to: 176301
     via: [52.3160806, 21.2916235]
     comment: "L37 turns round at the Polna junction in Cięciwa, not on the spot at Cięciwa Polna 02"
+  - from: 171102
+    to: 171302
+    via: [52.3393572, 21.1958549]
+    comment: "L27, L37 for Kobyłka Kościół 02 round Rondo 5 Września 1928 r. and back down Napoleona, not stopping northbound"
+  - from: 171302
+    to: 170502
+    via: [52.3380171, 21.1960586]
+    comment: "L26, L27, L40, L44 for Kobyłka Żymirskiego - Przychodnia 02 on down Napoleona and round Ks. Marmo, not reversing at Kościół 02"
   - from: 174801
     to: 138902
     via: [52.346775, 21.228277]
