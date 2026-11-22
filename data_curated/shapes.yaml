@@ -107,6 +107,14 @@ force_via:
     to: 128701
     via: [52.3242592, 21.048336]
     comment: "204 for Metro Bródno"
+  - from: 164951
+    to: 165051
+    via: [52.3549759, 21.1776207]
+    comment: "L27, L44 for Kobyłka Ziemowita 51 via the S8 service road and Ziemowita (Chrobrego works diversion), not reversing at the stop"
+  - from: 165052
+    to: 164952
+    via: [52.3549759, 21.1776207]
+    comment: "L27, L44 for Kobyłka Przyjacielska 52 via Ziemowita and the S8 service road (Chrobrego works diversion), not reversing at Ziemowita 52"
   - from: 166702
     to: 176301
     via: [52.3160806, 21.2916235]
