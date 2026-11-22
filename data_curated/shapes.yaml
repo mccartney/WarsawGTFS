@@ -107,6 +107,10 @@ force_via:
     to: 128701
     via: [52.3242592, 21.048336]
     comment: "204 for Metro Bródno"
+  - from: 159602
+    to: 171501
+    via: [52.323471, 21.219126]
+    comment: "L26 for Kobyłka Krasickiego 01 along Długa and up Bohaterów Ossowa, not reversing at Ks. Skorupki 02"
   - from: 164951
     to: 165051
     via: [52.3549759, 21.1776207]
