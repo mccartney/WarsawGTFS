@@ -281,6 +281,10 @@ force_via:
     to: 333802
     via: [52.163423, 21.027161]
     comment: "401 for Bacha 02 via the U-turn near P&R Ursynów"
+  - from: 361601
+    to: 376701
+    via: [52.0289991, 21.1237738]
+    comment: "L15 for Łubna 01 on along Szkolna and up Łubińska, not reversing at Baniocha - Szkoła 01 and Łubna 01"
   - from: 361602
     to: 337302
     via: [52.02445, 21.1194478]
