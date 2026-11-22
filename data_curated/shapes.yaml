@@ -277,6 +277,10 @@ force_via:
     to: 316403
     via: [52.0776309, 21.0354209]
     comment: "L53 for Piaseczno Chyliczkowska - Technikum 03 via Armii Krajowej, not reversing at the stop"
+  - from: 318802
+    to: 318803
+    via: [52.1053131, 21.1132952]
+    comment: "L85 for Konstancin-Jeziorna Klarysew 03 round Rondo Denzlingen (Borowa), not via Lipowa and Krótka"
   - from: 322304
     to: 372401
     via: [52.0813598, 21.0979863]
